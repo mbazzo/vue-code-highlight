@@ -791,9 +791,11 @@
 	  },
 
 	  beforeUpdate: function beforeUpdate() {
-	    var newText = this.$slots.default[0].text.replace(/^[\r\n\s]*|[\r\n\s]*$/g, '');
-	    this.$el.querySelector('code').textContent = newText;
-	    Prism.highlightAllUnder(this.$refs.codeBlock);
+	    if ( typeof this.$slots.default[0] === 'string' ) {
+	      var newText = this.$slots.default[0].replace(/^[\r\n\s]*|[\r\n\s]*$/g, '');
+	      this.$el.querySelector('code').textContent = newText;
+	      Prism.highlightAllUnder(this.$refs.codeBlock);
+	    }
 	  },
 	};
 
